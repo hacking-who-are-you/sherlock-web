@@ -122,4 +122,43 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .print-content {
+    display: none;
+    @media print {
+      display: block;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    h1 {
+      @apply text-2xl font-bold my-4;
+    }
+
+    h2 {
+      @apply text-xl font-bold my-2;
+    }
+
+    h3 {
+      @apply text-lg font-bold my-1;
+    }
+
+    table {
+      @apply w-full mb-4;
+    }
+
+    th,
+    td {
+      @apply border border-gray-300 p-2;
+    }
+
+    p {
+      @apply my-1;
+    }
+  }
+}
+
+@page {
+  margin: 80px;
+  size: auto;
 }
