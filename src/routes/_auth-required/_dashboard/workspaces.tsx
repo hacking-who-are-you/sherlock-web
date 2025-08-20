@@ -1,10 +1,11 @@
 import WorkspacesFrame from "@/features/dashboard/frames/workspaces-frame";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth-required/_dashboard/workspaces")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <WorkspacesFrame />;
+  const navigate = useNavigate();
+  return <WorkspacesFrame onOpenDashboard={() => navigate({ to: "/" })} />;
 }

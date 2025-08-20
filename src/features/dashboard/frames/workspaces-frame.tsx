@@ -50,7 +50,11 @@ interface Workspace {
   security_score: number;
 }
 
-const WorkspacesFrame = () => {
+const WorkspacesFrame = ({
+  onOpenDashboard,
+}: {
+  onOpenDashboard: () => void;
+}) => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -322,7 +326,7 @@ const WorkspacesFrame = () => {
                   size="sm"
                   className="flex-1 bg-primary hover:bg-primary/90"
                   onClick={() => {
-                    /* Navigate to workspace dashboard */
+                    onOpenDashboard();
                   }}
                 >
                   <Activity className="h-4 w-4 mr-2" />
