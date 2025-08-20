@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Brain, Loader2, AlertTriangle } from "lucide-react";
 import { Vulnerability } from "../types/vulnerability";
+import Markdown from "react-markdown";
+import { cn } from "@/lib/utils";
 
 interface AIAnalysisPanelProps {
   vulnerability: Vulnerability;
@@ -19,7 +21,7 @@ export function AIAnalysisPanel({ vulnerability, url }: AIAnalysisPanelProps) {
     setAnalysis("");
 
     try {
-      const res = await fetch("/api/analyze-vulnerability", {
+      const res = await fetch("http://localhost:8000/test/analysis", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -123,9 +125,17 @@ export function AIAnalysisPanel({ vulnerability, url }: AIAnalysisPanelProps) {
                 AI Analysis Results:
               </h4>
               <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-                <pre className="text-slate-300 text-sm whitespace-pre-wrap font-mono">
-                  {analysis}
-                </pre>
+                <div
+                  className={cn(
+                    "text-slate-300 text-sm font-mono",
+                    "[&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-cyan-400 [&>h3]:my-2",
+                    "[&>h4]:text-lg [&>h4]:font-bold [&>h4]:text-cyan-400 [&>h4]:my-1",
+                    "[&_li]:list-disc [&_li]:list-inside",
+                    "[&_p]:mb-1"
+                  )}
+                >
+                  <Markdown>{analysis}</Markdown>
+                </div>
               </div>
             </div>
             {!isAnalyzing && (
