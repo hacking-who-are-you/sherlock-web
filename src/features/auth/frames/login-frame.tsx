@@ -8,9 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff, Lock, Mail, Shield } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import { useLogin } from "../hooks/use-login";
+import logo from "@/assets/logo.svg";
 
 export const LoginFrame = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,7 +26,7 @@ export const LoginFrame = () => {
       <Card className="w-full max-w-md bg-slate-800/50 border-slate-700 backdrop-blur-sm relative z-10">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-            <Shield className="w-8 h-8 text-white" />
+            <img src={logo} alt="SHERLOCK" className="size-10 opacity-60" />
           </div>
           <div>
             <CardTitle className="text-2xl font-bold text-slate-100">

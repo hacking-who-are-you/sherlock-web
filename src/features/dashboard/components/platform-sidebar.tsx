@@ -1,5 +1,3 @@
-"use client";
-
 import type React from "react";
 
 import { useState } from "react";
@@ -23,6 +21,7 @@ import {
 } from "lucide-react";
 import { User } from "@/features/core/hooks/use-user";
 import { useToken } from "@/features/core/hooks/use-token";
+import logo from "@/assets/logo.svg";
 
 interface Tool {
   id: string;
@@ -158,13 +157,16 @@ export function PlatformSidebar({
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
         {!collapsed && (
-          <div>
-            <h1 className="text-xl font-bold text-sidebar-foreground">
-              SHERLOCK
-            </h1>
-            <p className="text-sm text-sidebar-foreground/70">
-              Multi-Tool Security Suite
-            </p>
+          <div className="flex gap-2 items-center">
+            <img src={logo} alt="SHERLOCK" className="size-10" />
+            <div>
+              <h1 className="text-xl font-bold text-sidebar-foreground">
+                SHERLOCK
+              </h1>
+              <p className="text-sm text-sidebar-foreground/70">
+                Multi-Tool Security Suite
+              </p>
+            </div>
           </div>
         )}
         <Button
