@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
-import { workspaceContext } from "./use-workspaces";
-
-export interface Workspace {
-  id: string;
-  name: string;
-  domain: string;
-  description: string;
-  status: "active" | "monitoring" | "maintenance";
-  created_at: string;
-  member_count: number;
-  last_scan: string;
-  security_score: number;
-}
+import { Workspace, workspaceContext } from "./use-workspaces";
 
 const mockWorkspaces: Workspace[] = [
   {

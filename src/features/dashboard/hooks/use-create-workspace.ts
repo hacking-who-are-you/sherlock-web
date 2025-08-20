@@ -1,8 +1,7 @@
 import z from "zod";
-import { useWorkspaces } from "./use-workspaces";
+import { useWorkspaces, Workspace } from "./use-workspaces";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Workspace } from "./workspaces-provider";
 
 const schema = z.object({
   name: z.string().min(1),

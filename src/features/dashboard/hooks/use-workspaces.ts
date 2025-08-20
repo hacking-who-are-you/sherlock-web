@@ -1,5 +1,16 @@
 import { createContext, useContext } from "react";
-import { Workspace } from "./workspaces-provider";
+
+export interface Workspace {
+  id: string;
+  name: string;
+  domain: string;
+  description: string;
+  status: "active" | "monitoring" | "maintenance";
+  created_at: string;
+  member_count: number;
+  last_scan: string;
+  security_score: number;
+}
 
 export const workspaceContext = createContext<{
   workspaces: Workspace[];
