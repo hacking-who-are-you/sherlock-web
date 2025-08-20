@@ -15,6 +15,7 @@ import { Route as AuthRequiredIndexRouteImport } from './routes/_auth-required/i
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthRequiredWorkspaceRouteImport } from './routes/_auth-required/$workspace'
 import { Route as AuthRequiredWorkspaceVulnerabilityScannerRouteImport } from './routes/_auth-required/$workspace/vulnerability-scanner'
+import { Route as AuthRequiredWorkspaceTrafficAnalyzerRouteImport } from './routes/_auth-required/$workspace/traffic-analyzer'
 import { Route as AuthRequiredWorkspaceDashboardRouteImport } from './routes/_auth-required/$workspace/dashboard'
 
 const AuthRoute = AuthRouteImport.update({
@@ -47,6 +48,12 @@ const AuthRequiredWorkspaceVulnerabilityScannerRoute =
     path: '/vulnerability-scanner',
     getParentRoute: () => AuthRequiredWorkspaceRoute,
   } as any)
+const AuthRequiredWorkspaceTrafficAnalyzerRoute =
+  AuthRequiredWorkspaceTrafficAnalyzerRouteImport.update({
+    id: '/traffic-analyzer',
+    path: '/traffic-analyzer',
+    getParentRoute: () => AuthRequiredWorkspaceRoute,
+  } as any)
 const AuthRequiredWorkspaceDashboardRoute =
   AuthRequiredWorkspaceDashboardRouteImport.update({
     id: '/dashboard',
@@ -60,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof AuthLoginRoute
   '/': typeof AuthRequiredIndexRoute
   '/$workspace/dashboard': typeof AuthRequiredWorkspaceDashboardRoute
+  '/$workspace/traffic-analyzer': typeof AuthRequiredWorkspaceTrafficAnalyzerRoute
   '/$workspace/vulnerability-scanner': typeof AuthRequiredWorkspaceVulnerabilityScannerRoute
 }
 export interface FileRoutesByTo {
@@ -68,6 +76,7 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginRoute
   '/': typeof AuthRequiredIndexRoute
   '/$workspace/dashboard': typeof AuthRequiredWorkspaceDashboardRoute
+  '/$workspace/traffic-analyzer': typeof AuthRequiredWorkspaceTrafficAnalyzerRoute
   '/$workspace/vulnerability-scanner': typeof AuthRequiredWorkspaceVulnerabilityScannerRoute
 }
 export interface FileRoutesById {
@@ -78,6 +87,7 @@ export interface FileRoutesById {
   '/auth/login': typeof AuthLoginRoute
   '/_auth-required/': typeof AuthRequiredIndexRoute
   '/_auth-required/$workspace/dashboard': typeof AuthRequiredWorkspaceDashboardRoute
+  '/_auth-required/$workspace/traffic-analyzer': typeof AuthRequiredWorkspaceTrafficAnalyzerRoute
   '/_auth-required/$workspace/vulnerability-scanner': typeof AuthRequiredWorkspaceVulnerabilityScannerRoute
 }
 export interface FileRouteTypes {
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/'
     | '/$workspace/dashboard'
+    | '/$workspace/traffic-analyzer'
     | '/$workspace/vulnerability-scanner'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/'
     | '/$workspace/dashboard'
+    | '/$workspace/traffic-analyzer'
     | '/$workspace/vulnerability-scanner'
   id:
     | '__root__'
@@ -105,6 +117,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/_auth-required/'
     | '/_auth-required/$workspace/dashboard'
+    | '/_auth-required/$workspace/traffic-analyzer'
     | '/_auth-required/$workspace/vulnerability-scanner'
   fileRoutesById: FileRoutesById
 }
@@ -157,6 +170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRequiredWorkspaceVulnerabilityScannerRouteImport
       parentRoute: typeof AuthRequiredWorkspaceRoute
     }
+    '/_auth-required/$workspace/traffic-analyzer': {
+      id: '/_auth-required/$workspace/traffic-analyzer'
+      path: '/traffic-analyzer'
+      fullPath: '/$workspace/traffic-analyzer'
+      preLoaderRoute: typeof AuthRequiredWorkspaceTrafficAnalyzerRouteImport
+      parentRoute: typeof AuthRequiredWorkspaceRoute
+    }
     '/_auth-required/$workspace/dashboard': {
       id: '/_auth-required/$workspace/dashboard'
       path: '/dashboard'
@@ -169,11 +189,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthRequiredWorkspaceRouteChildren {
   AuthRequiredWorkspaceDashboardRoute: typeof AuthRequiredWorkspaceDashboardRoute
+  AuthRequiredWorkspaceTrafficAnalyzerRoute: typeof AuthRequiredWorkspaceTrafficAnalyzerRoute
   AuthRequiredWorkspaceVulnerabilityScannerRoute: typeof AuthRequiredWorkspaceVulnerabilityScannerRoute
 }
 
 const AuthRequiredWorkspaceRouteChildren: AuthRequiredWorkspaceRouteChildren = {
   AuthRequiredWorkspaceDashboardRoute: AuthRequiredWorkspaceDashboardRoute,
+  AuthRequiredWorkspaceTrafficAnalyzerRoute:
+    AuthRequiredWorkspaceTrafficAnalyzerRoute,
   AuthRequiredWorkspaceVulnerabilityScannerRoute:
     AuthRequiredWorkspaceVulnerabilityScannerRoute,
 }

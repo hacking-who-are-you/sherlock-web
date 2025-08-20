@@ -32,6 +32,9 @@ function RouteComponent() {
           if (tool === "vulnerability-scanner") {
             navigate({ to: "vulnerability-scanner" });
           }
+          if (tool === "traffic-analyzer") {
+            navigate({ to: "traffic-analyzer" });
+          }
         }}
         user={user}
       />
