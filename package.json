@@ -12,6 +12,8 @@
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.1.12",
+    "@tanstack/react-router": "^1.131.27",
+    "@tanstack/react-router-devtools": "^1.131.27",
     "@types/node": "^24.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -22,6 +24,7 @@
     "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
+    "@tanstack/router-plugin": "^1.131.27",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
@@ -32,6 +35,6 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "tw-animate-css": "^1.3.7",
     "typescript": "^5.2.2",
-    "vite": "^5.3.4"
+    "vite": "^6.3.5"
   }
 }
