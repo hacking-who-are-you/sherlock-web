@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -6,10 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -24,20 +21,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Textarea } from "@/components/ui/textarea";
 import {
-  Plus,
-  Settings,
-  Users,
-  Globe,
-  MoreVertical,
-  Edit,
-  Trash2,
-  Shield,
   Activity,
   AlertTriangle,
+  Edit,
+  Globe,
+  MoreVertical,
+  Plus,
+  Settings,
+  Shield,
+  Trash2,
+  Users,
 } from "lucide-react";
+import { useState } from "react";
 import { useWorkspaces } from "../hooks/use-workspaces";
+import { CreateWorkspaceForm } from "../components/create-workspace-form";
 
 interface Workspace {
   id: string;
@@ -57,33 +55,7 @@ const WorkspacesFrame = ({
   onOpenDashboard: (workspace: Workspace) => void;
 }) => {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [selectedWorkspace, setSelectedWorkspace] = useState<Workspace | null>(
-    null
-  );
   const { workspaces, loading } = useWorkspaces();
-
-  const handleCreateWorkspace = async (formData: FormData) => {
-    // const name = formData.get("name") as string;
-    // const domain = formData.get("domain") as string;
-    // const description = formData.get("description") as string;
-
-    // Mock creation - in real app, this would call Supabase
-    // const newWorkspace: Workspace = {
-    //   id: Date.now().toString(),
-    //   name,
-    //   domain,
-    //   description,
-    //   status: "active",
-    //   created_at: new Date().toISOString().split("T")[0],
-    //   member_count: 1,
-    //   last_scan: new Date().toISOString(),
-    //   security_score: 0,
-    // };
-
-    // setWorkspaces([...workspaces, newWorkspace]);
-    setIsCreateDialogOpen(false);
-  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -140,58 +112,7 @@ const WorkspacesFrame = ({
                 Set up a new workspace to monitor a website or domain
               </DialogDescription>
             </DialogHeader>
-            <form action={handleCreateWorkspace} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-card-foreground">
-                  Workspace Name
-                </Label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="e.g., Production Website"
-                  required
-                  className="bg-input border-border text-foreground"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="domain" className="text-card-foreground">
-                  Domain
-                </Label>
-                <Input
-                  id="domain"
-                  name="domain"
-                  placeholder="e.g., example.com"
-                  required
-                  className="bg-input border-border text-foreground"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="description" className="text-card-foreground">
-                  Description
-                </Label>
-                <Textarea
-                  id="description"
-                  name="description"
-                  placeholder="Brief description of this workspace"
-                  className="bg-input border-border text-foreground"
-                />
-              </div>
-              <div className="flex justify-end space-x-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setIsCreateDialogOpen(false)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  className="bg-primary hover:bg-primary/90"
-                >
-                  Create Workspace
-                </Button>
-              </div>
-            </form>
+            <CreateWorkspaceForm close={() => setIsCreateDialogOpen(false)} />
           </DialogContent>
         </Dialog>
       </div>

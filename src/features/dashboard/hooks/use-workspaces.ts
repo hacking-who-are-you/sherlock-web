@@ -52,9 +52,13 @@ export const useWorkspaces = () => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const loading = false;
 
+  const addWorkspace = (workspace: Workspace) => {
+    setWorkspaces([...workspaces, workspace]);
+  };
+
   useEffect(() => {
     setWorkspaces(mockWorkspaces);
   }, []);
 
-  return { workspaces, loading };
+  return { workspaces, loading, addWorkspace };
 };
