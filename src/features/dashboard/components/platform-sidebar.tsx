@@ -154,7 +154,7 @@ export function PlatformSidebar({
         {!collapsed && (
           <div>
             <h1 className="text-xl font-bold text-sidebar-foreground">
-              CyberSec Platform
+              SHERLOCK
             </h1>
             <p className="text-sm text-sidebar-foreground/70">
               Multi-Tool Security Suite

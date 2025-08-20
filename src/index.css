@@ -4,44 +4,44 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated color scheme for multi-tool cybersecurity platform */
-  --background: #1e293b; /* Dark background for SOC environment */
-  --foreground: #ffffff; /* Primary text color */
-  --card: #374151; /* Card background for modular components */
-  --card-foreground: #ffffff; /* Text color for cards */
-  --popover: #374151; /* Background for popover menus */
-  --popover-foreground: #ffffff; /* Text color for popovers */
-  --primary: #15803d; /* Green for call-to-action buttons */
+  /* Updated color scheme for multi-workspace cybersecurity platform */
+  --background: #f0fdf4; /* Light background for the overall interface */
+  --foreground: #374151; /* Dark text for primary content */
+  --card: #ffffff; /* White cards for workspace details */
+  --card-foreground: #374151; /* Dark text on cards */
+  --popover: #ffffff; /* Background for popovers */
+  --popover-foreground: #374151; /* Text in popovers */
+  --primary: #15803d; /* Main action color for buttons */
   --primary-foreground: #ffffff; /* Text color on primary buttons */
-  --secondary: #84cc16; /* Lime green for secondary actions */
-  --secondary-foreground: #374151; /* Text color on secondary buttons */
-  --muted: #f0fdf4; /* Muted background for less important information */
-  --muted-foreground: #374151; /* Text color for muted elements */
-  --accent: #84cc16; /* Lime green for highlight elements */
-  --accent-foreground: #ffffff; /* Text color for accent elements */
-  --destructive: #ea580c; /* Orange for destructive actions */
-  --destructive-foreground: #ffffff; /* Text color for destructive actions */
-  --border: #374151; /* Border color for cards and inputs */
-  --input: #f0fdf4; /* Input background */
-  --ring: #84cc16; /* Focus ring color */
-  --chart-1: #15803d; /* Primary chart color */
-  --chart-2: #ea580c; /* Secondary chart color */
-  --chart-3: #4b5563; /* Tertiary chart color */
-  --chart-4: #d97706; /* Additional chart color */
-  --chart-5: #f97316; /* Additional chart color */
-  --radius: 0.5rem; /* Standard corner rounding */
-  --sidebar: #374151; /* Sidebar background */
-  --sidebar-foreground: #ffffff; /* Sidebar text color */
-  --sidebar-primary: #1e293b; /* Primary sidebar background */
-  --sidebar-primary-foreground: #ffffff; /* Sidebar primary text color */
-  --sidebar-accent: #84cc16; /* Accent color for sidebar elements */
-  --sidebar-accent-foreground: #ffffff; /* Text color for sidebar accent */
-  --sidebar-border: #4b5563; /* Sidebar border color */
-  --sidebar-ring: #84cc16; /* Focus ring for sidebar items */
+  --secondary: #84cc16; /* Accent color for secondary actions */
+  --secondary-foreground: #374151; /* Text color on secondary actions */
+  --muted: #f0fdf4; /* Muted background for less important sections */
+  --muted-foreground: #6b7280; /* Text color for muted sections */
+  --accent: #84cc16; /* Accent color for highlights */
+  --accent-foreground: #ffffff; /* Text color on accent elements */
+  --destructive: #dc2626; /* Color for destructive actions */
+  --destructive-foreground: #ffffff; /* Text color on destructive actions */
+  --border: #e5e7eb; /* Light border for separation */
+  --input: #ffffff; /* Background for input fields */
+  --ring: rgba(22, 163, 74, 0.5); /* Focus ring color for accessibility */
+  --chart-1: #15803d; /* Main color for chart data */
+  --chart-2: #84cc16; /* Secondary color for chart data */
+  --chart-3: #6b7280; /* Tertiary color for chart data */
+  --chart-4: #dc2626; /* Color for alerts in charts */
+  --chart-5: #1e3a8a; /* Color for informational data in charts */
+  --radius: 0.5rem; /* Rounded corners for cards and buttons */
+  --sidebar: #ffffff; /* Sidebar background */
+  --sidebar-foreground: #374151; /* Sidebar text color */
+  --sidebar-primary: #f0fdf4; /* Sidebar primary background */
+  --sidebar-primary-foreground: #374151; /* Sidebar primary text */
+  --sidebar-accent: #84cc16; /* Sidebar accent color */
+  --sidebar-accent-foreground: #ffffff; /* Text color on sidebar accent */
+  --sidebar-border: #e5e7eb; /* Border for sidebar elements */
+  --sidebar-ring: rgba(22, 163, 74, 0.5); /* Focus ring for sidebar */
 }
 
 .dark {
-  /* Dark mode uses same colors as our platform theme is already dark */
+  /* Dark mode maintains professional cybersecurity theme */
   --background: #1e293b;
   --foreground: #ffffff;
   --card: #374151;
@@ -52,28 +52,28 @@
   --primary-foreground: #ffffff;
   --secondary: #84cc16;
   --secondary-foreground: #374151;
-  --muted: #f0fdf4;
-  --muted-foreground: #374151;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
   --accent: #84cc16;
   --accent-foreground: #ffffff;
-  --destructive: #ea580c;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #374151;
-  --input: #f0fdf4;
-  --ring: #84cc16;
+  --border: #475569;
+  --input: #374151;
+  --ring: rgba(22, 163, 74, 0.5);
   --chart-1: #15803d;
-  --chart-2: #ea580c;
-  --chart-3: #4b5563;
-  --chart-4: #d97706;
-  --chart-5: #f97316;
+  --chart-2: #84cc16;
+  --chart-3: #6b7280;
+  --chart-4: #dc2626;
+  --chart-5: #1e3a8a;
   --sidebar: #374151;
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #1e293b;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #84cc16;
   --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #4b5563;
-  --sidebar-ring: #84cc16;
+  --sidebar-border: #475569;
+  --sidebar-ring: rgba(22, 163, 74, 0.5);
 }
 
 @theme inline {
