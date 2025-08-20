@@ -33,7 +33,7 @@ interface Tool {
   category: "scanner" | "analysis" | "reporting" | "management";
 }
 
-const tools: Tool[] = [
+const tools = [
   {
     id: "vulnerability-scanner",
     name: "Vulnerability Scanner",
@@ -82,11 +82,13 @@ const tools: Tool[] = [
     status: "coming-soon",
     category: "scanner",
   },
-];
+] as const satisfies Tool[];
+
+type ToolId = "dashboard" | (typeof tools)[number]["id"];
 
 interface PlatformSidebarProps {
-  activeTool: string;
-  onToolChange: (toolId: string) => void;
+  activeTool: ToolId;
+  onToolChange: (toolId: ToolId) => void;
   user?: User | null;
 }
 

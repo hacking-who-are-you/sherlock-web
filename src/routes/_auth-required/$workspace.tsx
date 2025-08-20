@@ -1,7 +1,12 @@
 import { useUser } from "@/features/core/hooks/use-user";
 import { PlatformSidebar } from "@/features/dashboard/components/platform-sidebar";
 import { WorkspaceSelector } from "@/features/dashboard/components/workspace-selector";
-import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth-required/$workspace")({
   component: RouteComponent,
@@ -9,12 +14,21 @@ export const Route = createFileRoute("/_auth-required/$workspace")({
 
 function RouteComponent() {
   const user = useUser();
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: "/$workspace" });
+  const location = useLocation();
+
   return (
     <div className="min-h-screen bg-background flex">
       <PlatformSidebar
-        activeTool={"dashboard"}
-        onToolChange={(tool) => console.log(tool)}
+        activeTool={location.href.split("/").pop()}
+        onToolChange={(tool) => {
+          if (tool === "dashboard") {
+            navigate({ to: "dashboard" });
+          }
+          if (tool === "vulnerability-scanner") {
+            navigate({ to: "vulnerability-scanner" });
+          }
+        }}
         user={user}
       />
 

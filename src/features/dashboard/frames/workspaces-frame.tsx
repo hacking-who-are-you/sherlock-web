@@ -53,7 +53,7 @@ interface Workspace {
 const WorkspacesFrame = ({
   onOpenDashboard,
 }: {
-  onOpenDashboard: () => void;
+  onOpenDashboard: (workspace: Workspace) => void;
 }) => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -326,7 +326,7 @@ const WorkspacesFrame = ({
                   size="sm"
                   className="flex-1 bg-primary hover:bg-primary/90"
                   onClick={() => {
-                    onOpenDashboard();
+                    onOpenDashboard(workspace);
                   }}
                 >
                   <Activity className="h-4 w-4 mr-2" />

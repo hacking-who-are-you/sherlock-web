@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { ChevronDown, Globe, Plus, Settings } from "lucide-react";
+import { useNavigate, useParams } from "@tanstack/react-router";
 
 interface Workspace {
   id: string;
@@ -20,20 +21,16 @@ interface Workspace {
 }
 
 interface WorkspaceSelectorProps {
-  onWorkspaceChange?: (workspaceId: string) => void;
   onCreateWorkspace?: () => void;
   onManageWorkspaces?: () => void;
 }
 
 export function WorkspaceSelector({
-  onWorkspaceChange,
   onCreateWorkspace,
   onManageWorkspaces,
 }: WorkspaceSelectorProps) {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
-  const [selectedWorkspace, setSelectedWorkspace] = useState<Workspace | null>(
-    null
-  );
+  const { workspace } = useParams({ from: "/_auth-required/$workspace" });
   const [loading, setLoading] = useState(true);
 
   // Mock data for demonstration
@@ -62,13 +59,17 @@ export function WorkspaceSelector({
       },
     ];
     setWorkspaces(mockWorkspaces);
-    setSelectedWorkspace(mockWorkspaces[0]); // Default to first workspace
     setLoading(false);
   }, []);
 
+  const selectedWorkspace = useMemo(
+    () => workspaces.find((v) => v.id === workspace),
+    [workspaces, workspace]
+  );
+  const navigate = useNavigate({ from: "/$workspace" });
+
   const handleWorkspaceSelect = (workspace: Workspace) => {
-    setSelectedWorkspace(workspace);
-    onWorkspaceChange?.(workspace.id);
+    navigate({ to: ".", params: { workspace: workspace.id } });
   };
 
   const getStatusColor = (status: string) => {

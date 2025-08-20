@@ -10,8 +10,11 @@ function RouteComponent() {
   return (
     <div className="p-4">
       <WorkspacesFrame
-        onOpenDashboard={() =>
-          navigate({ to: "/$workspace", params: { workspace: "sample" } })
+        onOpenDashboard={(workspace) =>
+          navigate({
+            to: "/$workspace/dashboard",
+            params: { workspace: workspace.id },
+          })
         }
       />
     </div>
