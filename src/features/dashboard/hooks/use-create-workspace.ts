@@ -1,7 +1,8 @@
 import z from "zod";
-import { useWorkspaces, Workspace } from "./use-workspaces";
+import { useWorkspaces } from "./use-workspaces";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Workspace } from "./workspaces-provider";
 
 const schema = z.object({
   name: z.string().min(1),
@@ -9,14 +10,14 @@ const schema = z.object({
   description: z.string().min(1),
 });
 
-export const useCreateWorkspace = () => {
-  const { register, handleSubmit } = useForm({
+export const useCreateWorkspace = ({ close }: { close: () => void }) => {
+  const { register, handleSubmit, formState } = useForm({
     defaultValues: { name: "", description: "", domain: "" },
     resolver: zodResolver(schema),
   });
   const { addWorkspace } = useWorkspaces();
 
-  const handleCreateWorkspace = handleSubmit((data) => {
+  const handleCreateWorkspace = handleSubmit(async (data) => {
     const newWorkspace: Workspace = {
       id: Date.now().toString(),
       name: data.name,
@@ -30,7 +31,12 @@ export const useCreateWorkspace = () => {
     };
 
     addWorkspace(newWorkspace);
+    close();
   });
 
-  return { handleCreateWorkspace, register };
+  return {
+    handleCreateWorkspace,
+    register,
+    error: formState.errors.root?.message,
+  };
 };

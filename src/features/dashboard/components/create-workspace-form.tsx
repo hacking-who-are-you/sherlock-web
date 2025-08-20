@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCreateWorkspace } from "../hooks/use-create-workspace";
 
 export const CreateWorkspaceForm = ({ close }: { close: () => void }) => {
-  const { handleCreateWorkspace, register } = useCreateWorkspace();
+  const { handleCreateWorkspace, register } = useCreateWorkspace({ close });
 
   return (
     <form onSubmit={handleCreateWorkspace} className="space-y-4">
