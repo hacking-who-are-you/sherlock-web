@@ -28,6 +28,7 @@ import {
   TrendingUp,
   Clock,
 } from "lucide-react";
+import Markdown from "react-markdown";
 
 interface VulnerabilityResult {
   id: string;
@@ -379,7 +380,7 @@ export const ScanReports = ({ currentScan }: ScanReportsProps) => {
                           </div>
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          {vuln.description}
+                          <Markdown>{vuln.description}</Markdown>
                         </p>
                         <div className="text-xs font-mono bg-muted p-2 rounded">
                           {vuln.url}
