@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { api } from "@/api";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Loader2, AlertTriangle } from "lucide-react";
-import { Vulnerability } from "../types/vulnerability";
-import Markdown from "react-markdown";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { AlertTriangle, Brain, Loader2 } from "lucide-react";
+import { useState } from "react";
+import Markdown from "react-markdown";
+import { Vulnerability } from "../types/vulnerability";
 
 interface AIAnalysisPanelProps {
   vulnerability: Vulnerability;
@@ -21,24 +22,18 @@ export function AIAnalysisPanel({ vulnerability, url }: AIAnalysisPanelProps) {
     setAnalysis("");
 
     try {
-      const res = await fetch("http://localhost:8000/test/analysis", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const res = await api.post(
+        "/test/analysis",
+        {
           vulnerability,
           evidence: vulnerability.evidence,
           url,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to get AI analysis");
-      }
+        },
+        { responseType: "stream" }
+      );
 
       // Handle streaming response
-      const reader = res.body?.getReader();
+      const reader = res.data?.getReader();
       const decoder = new TextDecoder();
       let fullResponse = "";
 
@@ -53,6 +48,7 @@ export function AIAnalysisPanel({ vulnerability, url }: AIAnalysisPanelProps) {
         }
       }
     } catch (error) {
+      console.error(error);
       setAnalysis("Error: Failed to get AI analysis. Please try again.");
     } finally {
       setIsAnalyzing(false);
