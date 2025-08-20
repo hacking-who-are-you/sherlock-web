@@ -1,7 +1,7 @@
 import { useUser } from "@/features/core/hooks/use-user";
 import { PlatformSidebar } from "@/features/dashboard/components/platform-sidebar";
 import { WorkspaceSelector } from "@/features/dashboard/components/workspace-selector";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth-required/_dashboard")({
   component: RouteComponent,
@@ -9,6 +9,7 @@ export const Route = createFileRoute("/_auth-required/_dashboard")({
 
 function RouteComponent() {
   const user = useUser();
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background flex">
       <PlatformSidebar
@@ -21,9 +22,9 @@ function RouteComponent() {
         <div className="border-b border-border bg-card">
           <div className="p-4">
             <WorkspaceSelector
-            // onWorkspaceChange={handleWorkspaceChange}
-            // onCreateWorkspace={handleCreateWorkspace}
-            // onManageWorkspaces={handleManageWorkspaces}
+              // onWorkspaceChange={handleWorkspaceChange}
+              onCreateWorkspace={() => navigate({ to: "/workspaces" })}
+              onManageWorkspaces={() => navigate({ to: "/workspaces" })}
             />
           </div>
         </div>
