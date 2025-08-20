@@ -37,6 +37,7 @@ import {
   Activity,
   AlertTriangle,
 } from "lucide-react";
+import { useWorkspaces } from "../hooks/use-workspaces";
 
 interface Workspace {
   id: string;
@@ -55,74 +56,32 @@ const WorkspacesFrame = ({
 }: {
   onOpenDashboard: (workspace: Workspace) => void;
 }) => {
-  const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [selectedWorkspace, setSelectedWorkspace] = useState<Workspace | null>(
     null
   );
-  const [loading, setLoading] = useState(true);
-
-  // Mock data for demonstration
-  useEffect(() => {
-    const mockWorkspaces: Workspace[] = [
-      {
-        id: "1",
-        name: "Production Website",
-        domain: "example.com",
-        description: "Main production environment monitoring",
-        status: "active",
-        created_at: "2024-01-15",
-        member_count: 8,
-        last_scan: "2024-01-20T10:30:00Z",
-        security_score: 92,
-      },
-      {
-        id: "2",
-        name: "E-commerce Platform",
-        domain: "shop.example.com",
-        description: "Online store security monitoring",
-        status: "monitoring",
-        created_at: "2024-01-10",
-        member_count: 5,
-        last_scan: "2024-01-20T08:15:00Z",
-        security_score: 87,
-      },
-      {
-        id: "3",
-        name: "API Gateway",
-        domain: "api.example.com",
-        description: "Backend API security assessment",
-        status: "maintenance",
-        created_at: "2024-01-05",
-        member_count: 3,
-        last_scan: "2024-01-19T16:45:00Z",
-        security_score: 78,
-      },
-    ];
-    setWorkspaces(mockWorkspaces);
-    setLoading(false);
-  }, []);
+  const { workspaces, loading } = useWorkspaces();
 
   const handleCreateWorkspace = async (formData: FormData) => {
-    const name = formData.get("name") as string;
-    const domain = formData.get("domain") as string;
-    const description = formData.get("description") as string;
+    // const name = formData.get("name") as string;
+    // const domain = formData.get("domain") as string;
+    // const description = formData.get("description") as string;
 
     // Mock creation - in real app, this would call Supabase
-    const newWorkspace: Workspace = {
-      id: Date.now().toString(),
-      name,
-      domain,
-      description,
-      status: "active",
-      created_at: new Date().toISOString().split("T")[0],
-      member_count: 1,
-      last_scan: new Date().toISOString(),
-      security_score: 0,
-    };
+    // const newWorkspace: Workspace = {
+    //   id: Date.now().toString(),
+    //   name,
+    //   domain,
+    //   description,
+    //   status: "active",
+    //   created_at: new Date().toISOString().split("T")[0],
+    //   member_count: 1,
+    //   last_scan: new Date().toISOString(),
+    //   security_score: 0,
+    // };
 
-    setWorkspaces([...workspaces, newWorkspace]);
+    // setWorkspaces([...workspaces, newWorkspace]);
     setIsCreateDialogOpen(false);
   };
 

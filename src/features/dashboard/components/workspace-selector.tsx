@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,17 +8,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
-import { ChevronDown, Globe, Plus, Settings } from "lucide-react";
 import { useNavigate, useParams } from "@tanstack/react-router";
-
-interface Workspace {
-  id: string;
-  name: string;
-  domain: string;
-  status: "active" | "monitoring" | "maintenance";
-  security_score: number;
-}
+import { ChevronDown, Globe, Plus, Settings } from "lucide-react";
+import { useMemo } from "react";
+import { useWorkspaces, Workspace } from "../hooks/use-workspaces";
 
 interface WorkspaceSelectorProps {
   onCreateWorkspace?: () => void;
@@ -29,38 +22,8 @@ export function WorkspaceSelector({
   onCreateWorkspace,
   onManageWorkspaces,
 }: WorkspaceSelectorProps) {
-  const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const { workspace } = useParams({ from: "/_auth-required/$workspace" });
-  const [loading, setLoading] = useState(true);
-
-  // Mock data for demonstration
-  useEffect(() => {
-    const mockWorkspaces: Workspace[] = [
-      {
-        id: "1",
-        name: "Production Website",
-        domain: "example.com",
-        status: "active",
-        security_score: 92,
-      },
-      {
-        id: "2",
-        name: "E-commerce Platform",
-        domain: "shop.example.com",
-        status: "monitoring",
-        security_score: 87,
-      },
-      {
-        id: "3",
-        name: "API Gateway",
-        domain: "api.example.com",
-        status: "maintenance",
-        security_score: 78,
-      },
-    ];
-    setWorkspaces(mockWorkspaces);
-    setLoading(false);
-  }, []);
+  const { workspaces, loading } = useWorkspaces();
 
   const selectedWorkspace = useMemo(
     () => workspaces.find((v) => v.id === workspace),
