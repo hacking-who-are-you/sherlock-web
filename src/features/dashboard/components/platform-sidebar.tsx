@@ -84,7 +84,11 @@ const tools = [
   },
 ] as const satisfies Tool[];
 
-type ToolId = "dashboard" | (typeof tools)[number]["id"];
+type ToolId =
+  | "dashboard"
+  | "reporting-hub"
+  | "tool-management"
+  | (typeof tools)[number]["id"];
 
 interface PlatformSidebarProps {
   activeTool: ToolId;
