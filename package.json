@@ -21,6 +21,7 @@
     "@tanstack/react-router": "^1.131.27",
     "@tanstack/react-router-devtools": "^1.131.27",
     "@toss/react": "^1.8.1",
+    "@toss/use-loading": "^1.2.2",
     "@types/node": "^24.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

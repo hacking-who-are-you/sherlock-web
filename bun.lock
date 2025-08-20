@@ -15,6 +15,7 @@
         "@tanstack/react-router": "^1.131.27",
         "@tanstack/react-router-devtools": "^1.131.27",
         "@toss/react": "^1.8.1",
+        "@toss/use-loading": "^1.2.2",
         "@types/node": "^24.3.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
@@ -360,6 +361,8 @@
     "@toss/react": ["@toss/react@1.8.1", "", { "dependencies": { "@babel/runtime": "^7.14.8", "@toss/storage": "^1.4.1", "@toss/utils": "^1.6.1", "classnames": "^2.3.1", "lodash.debounce": "^4.0.8", "lodash.throttle": "^4.1.1" }, "peerDependencies": { "react": "^16.0.0 || ^17.0.0 || ^18" } }, "sha512-jH3oo/7yctexuutj/YgQrddaK1bU2s5659dkJIXOe23bEjkY+lbhvEz2FLEhRjSo6k6ktPagpxO4AcdhCi5k5A=="],
 
     "@toss/storage": ["@toss/storage@1.4.1", "", { "dependencies": { "@babel/runtime": "^7.19.0" } }, "sha512-jvnBXAQ/Fqqdt+gqYKeHYk7SzR2LX/FC50JIoVI0RldG1mDh1tebOqD7XkrZ89q77t/RwTuh60+8fjZDgend/g=="],
+
+    "@toss/use-loading": ["@toss/use-loading@1.2.2", "", { "dependencies": { "@toss/react": "^1.8.1" }, "peerDependencies": { "react": "^16.8 || ^17 || ^18" } }, "sha512-Hqw14Gbsd0BkCSkOjBNMz/codVvUEIBpq/vCWAaOCEStSAj2ychb63CiM/0Z4sNCZK3Z4cgKCrh7eOxt2PaVZg=="],
 
     "@toss/utility-types": ["@toss/utility-types@1.2.1", "", {}, "sha512-1y8s1bvmuhuMX/d6qR9mmvcgFZIKYIQqJbAIshlGArXkjk/ec67gXc5uByEV1Y7in9ZhrGNRmjD8DTH0988vpQ=="],
 
