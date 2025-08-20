@@ -3,7 +3,7 @@ import { PlatformSidebar } from "@/features/dashboard/components/platform-sideba
 import { WorkspaceSelector } from "@/features/dashboard/components/workspace-selector";
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_auth-required/_dashboard")({
+export const Route = createFileRoute("/_auth-required/$workspace")({
   component: RouteComponent,
 });
 
@@ -23,8 +23,8 @@ function RouteComponent() {
           <div className="p-4">
             <WorkspaceSelector
               // onWorkspaceChange={handleWorkspaceChange}
-              onCreateWorkspace={() => navigate({ to: "/workspaces" })}
-              onManageWorkspaces={() => navigate({ to: "/workspaces" })}
+              onCreateWorkspace={() => navigate({ to: "/" })}
+              onManageWorkspaces={() => navigate({ to: "/" })}
             />
           </div>
         </div>

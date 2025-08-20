@@ -5,6 +5,6 @@ function RouteComponent() {
   return <DashboardFrame />;
 }
 
-export const Route = createFileRoute("/_auth-required/_dashboard/")({
+export const Route = createFileRoute("/_auth-required/$workspace/")({
   component: RouteComponent,
 });
