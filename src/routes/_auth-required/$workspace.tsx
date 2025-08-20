@@ -20,7 +20,11 @@ function RouteComponent() {
   return (
     <div className="min-h-screen bg-background flex">
       <PlatformSidebar
-        activeTool={location.href.split("/").pop()}
+        activeTool={
+          location.href.split("/").pop() as React.ComponentProps<
+            typeof PlatformSidebar
+          >["activeTool"]
+        }
         onToolChange={(tool) => {
           if (tool === "dashboard") {
             navigate({ to: "dashboard" });
