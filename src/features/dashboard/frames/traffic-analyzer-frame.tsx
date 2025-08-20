@@ -31,23 +31,11 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
+import { useTrafficAnalysis } from "../services/use-traffic-analysis";
 
-interface TrafficData {
-  id: string;
-  timestamp: string;
-  ipAddress: string;
-  country: string;
-  city: string;
-  userAgent: string;
-  requestMethod: string;
-  requestPath: string;
-  responseCode: number;
-  responseTime: number;
-  threatLevel: "low" | "medium" | "high" | "critical";
-  isBlocked: boolean;
-}
-
-const getThreatLevelColor = (level: TrafficData["threatLevel"]) => {
+const getThreatLevelColor = (
+  level: ReturnType<typeof useTrafficAnalysis>["logs"][number]["threatLevel"]
+) => {
   switch (level) {
     case "low":
       return "bg-green-100 text-green-800 border-green-200";
@@ -72,98 +60,11 @@ export const TrafficAnalyzerFrame = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showBlockedOnly, setShowBlockedOnly] = useState(false);
 
-  const [trafficData] = useState<TrafficData[]>([
-    {
-      id: "1",
-      timestamp: "2024-01-15 14:32:15",
-      ipAddress: "192.168.1.100",
-      country: "South Korea",
-      city: "Seoul",
-      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-      requestMethod: "GET",
-      requestPath: "/api/users",
-      responseCode: 200,
-      responseTime: 45,
-      threatLevel: "low",
-      isBlocked: false,
-    },
-    {
-      id: "2",
-      timestamp: "2024-01-15 14:31:42",
-      ipAddress: "203.241.xxx.xxx",
-      country: "South Korea",
-      city: "Busan",
-      userAgent:
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
-      requestMethod: "POST",
-      requestPath: "/api/auth/login",
-      responseCode: 401,
-      responseTime: 120,
-      threatLevel: "medium",
-      isBlocked: false,
-    },
-    {
-      id: "3",
-      timestamp: "2024-01-15 14:30:18",
-      ipAddress: "185.220.xxx.xxx",
-      country: "Germany",
-      city: "Berlin",
-      userAgent: "python-requests/2.28.1",
-      requestMethod: "GET",
-      requestPath: "/admin",
-      responseCode: 403,
-      responseTime: 15,
-      threatLevel: "high",
-      isBlocked: true,
-    },
-    {
-      id: "4",
-      timestamp: "2024-01-15 14:29:55",
-      ipAddress: "45.95.xxx.xxx",
-      country: "Netherlands",
-      city: "Amsterdam",
-      userAgent: "sqlmap/1.6.12",
-      requestMethod: "POST",
-      requestPath: "/api/users?id=1' OR '1'='1",
-      responseCode: 400,
-      responseTime: 8,
-      threatLevel: "critical",
-      isBlocked: true,
-    },
-    {
-      id: "5",
-      timestamp: "2024-01-15 14:28:33",
-      ipAddress: "172.16.xxx.xxx",
-      country: "South Korea",
-      city: "Incheon",
-      userAgent:
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15",
-      requestMethod: "GET",
-      requestPath: "/dashboard",
-      responseCode: 200,
-      responseTime: 67,
-      threatLevel: "low",
-      isBlocked: false,
-    },
-    {
-      id: "6",
-      timestamp: "2024-01-15 14:27:12",
-      ipAddress: "103.21.xxx.xxx",
-      country: "India",
-      city: "Mumbai",
-      userAgent: "curl/7.68.0",
-      requestMethod: "HEAD",
-      requestPath: "/.env",
-      responseCode: 404,
-      responseTime: 12,
-      threatLevel: "high",
-      isBlocked: true,
-    },
-  ]);
+  const { logs: trafficData } = useTrafficAnalysis("2025-08-20");
 
   const filteredData = trafficData.filter((item) => {
     const matchesSearch =
-      item.ipAddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.ip.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.requestPath.toLowerCase().includes(searchTerm.toLowerCase());
@@ -180,8 +81,7 @@ export const TrafficAnalyzerFrame = () => {
       (item) => item.threatLevel === "critical"
     ).length,
     averageResponseTime: Math.round(
-      trafficData.reduce((sum, item) => sum + item.responseTime, 0) /
-        trafficData.length
+      trafficData.reduce((sum, item) => sum + item.time, 0) / trafficData.length
     ),
   };
 
@@ -350,7 +250,7 @@ export const TrafficAnalyzerFrame = () => {
                       {traffic.timestamp}
                     </TableCell>
                     <TableCell className="font-mono text-sm">
-                      {traffic.ipAddress}
+                      {traffic.ip}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
@@ -369,7 +269,7 @@ export const TrafficAnalyzerFrame = () => {
                       <div>
                         <div className="flex items-center gap-2">
                           <Badge variant="outline" className="text-xs">
-                            {traffic.requestMethod}
+                            {traffic.method}
                           </Badge>
                           <span className="text-sm font-mono">
                             {traffic.requestPath}
@@ -383,12 +283,12 @@ export const TrafficAnalyzerFrame = () => {
                     <TableCell>
                       <div>
                         <div
-                          className={`text-sm font-medium ${getResponseCodeColor(traffic.responseCode)}`}
+                          className={`text-sm font-medium ${getResponseCodeColor(traffic.status)}`}
                         >
-                          {traffic.responseCode}
+                          {traffic.status}
                         </div>
                         <div className="text-xs text-muted-foreground">
-                          {traffic.responseTime}ms
+                          {traffic.time}ms
                         </div>
                       </div>
                     </TableCell>
