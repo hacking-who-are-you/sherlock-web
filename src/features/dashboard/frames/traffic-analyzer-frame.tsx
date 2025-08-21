@@ -60,7 +60,9 @@ export const TrafficAnalyzerFrame = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showBlockedOnly, setShowBlockedOnly] = useState(false);
 
-  const { logs: trafficData } = useTrafficAnalysis("2025-08-20");
+  const { logs: trafficData } = useTrafficAnalysis(
+    new Date().toISOString().split("T")[0]
+  );
 
   const filteredData = trafficData.filter((item) => {
     const matchesSearch =

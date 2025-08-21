@@ -10,6 +10,8 @@ interface Log {
   status_code: number;
   process_time_ms: number;
   received_at: string;
+  threats: { xss: number; sqli: number; pathtraversal: number };
+  watson: { anomaly: boolean; reconstruction_error: number; threshold: number };
 }
 
 interface TrafficData {
@@ -32,7 +34,7 @@ export const useTrafficAnalysis = (date: string) => {
     queryKey: ["traffic-analysis", date],
     queryFn: () =>
       api
-        .get<{ logs: Log[] }>("/trafficAnalysis/logs", { params: { date } })
+        .get<{ logs: Log[] }>("/traffic/logs", { params: { date } })
         .then((res) =>
           res.data.logs.map(
             (v) =>
@@ -48,7 +50,18 @@ export const useTrafficAnalysis = (date: string) => {
                 city: "N/A",
                 requestPath: v.url,
                 isBlocked: v.status_code >= 400,
-                threatLevel: "low",
+                threatLevel:
+                  v.threats.xss > 0
+                    ? "high"
+                    : v.threats.sqli > 0
+                      ? "critical"
+                      : v.threats.pathtraversal > 0
+                        ? "medium"
+                        : v.watson.anomaly
+                          ? "critical"
+                          : v.watson.reconstruction_error > v.watson.threshold
+                            ? "high"
+                            : "low",
               }) as TrafficData
           )
         ),
