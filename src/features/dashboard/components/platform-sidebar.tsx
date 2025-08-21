@@ -1,6 +1,6 @@
 import type React from "react";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +22,7 @@ import {
 import { User } from "@/features/core/hooks/use-user";
 import { useToken } from "@/features/core/hooks/use-token";
 import logo from "@/assets/logo.svg";
+import { useMode } from "../hooks/use-mode";
 
 interface Tool {
   id: string;
@@ -134,12 +135,18 @@ export function PlatformSidebar({
     }
   };
 
-  const categories = [
-    { id: "scanner", name: "Security Scanners", icon: Shield },
-    { id: "analysis", name: "Analysis Tools", icon: BarChart3 },
-    { id: "reporting", name: "Reporting", icon: FileText },
-    { id: "management", name: "Management", icon: Settings },
-  ];
+  const { mode } = useMode();
+
+  const categories = useMemo(
+    () => [
+      ...(mode
+        ? [{ id: "scanner", name: "Security Scanners", icon: Shield }]
+        : [{ id: "analysis", name: "Analysis Tools", icon: BarChart3 }]),
+      { id: "reporting", name: "Reporting", icon: FileText },
+      { id: "management", name: "Management", icon: Settings },
+    ],
+    [mode]
+  );
 
   const { setToken } = useToken();
 
@@ -161,7 +168,7 @@ export function PlatformSidebar({
             <img src={logo} alt="SHERLOCK" className="size-10" />
             <div>
               <h1 className="text-xl font-bold text-sidebar-foreground">
-                SHERLOCK
+                SHERLOCK {mode ? "Scanner" : "Detector"}
               </h1>
               <p className="text-sm text-sidebar-foreground/70">
                 Multi-Tool Security Suite

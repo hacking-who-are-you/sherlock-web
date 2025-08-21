@@ -12,10 +12,12 @@ import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import { useLogin } from "../hooks/use-login";
 import logo from "@/assets/logo.svg";
+import { useMode } from "@/features/dashboard/hooks/use-mode";
 
 export const LoginFrame = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const { mode, setMode } = useMode();
 
   const { onSubmit, register, loading, error } = useLogin();
 
@@ -30,7 +32,9 @@ export const LoginFrame = () => {
           </div>
           <div>
             <CardTitle className="text-2xl font-bold text-slate-100">
-              {isSignUp ? "Create Account" : "SHERLOCK"}
+              {isSignUp
+                ? "Create Account"
+                : `SHERLOCK ${mode ? "Scanner" : "Detector"}`}
             </CardTitle>
             <CardDescription className="text-slate-400">
               {isSignUp ? "Join the SHERLOCK" : "Access your SHERLOCK"}
@@ -113,6 +117,12 @@ export const LoginFrame = () => {
               {isSignUp
                 ? "Already have an account? Sign in"
                 : "Need an account? Sign up"}
+            </button>
+          </div>
+
+          <div className="text-center text-sm text-slate-400">
+            <button onClick={() => setMode(!mode)}>
+              Use SHERLOCK {mode ? "Detector" : "Scanner"}
             </button>
           </div>
 

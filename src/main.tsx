@@ -10,6 +10,7 @@ import { WorkspacesProvider } from "./features/dashboard/hooks/workspaces-provid
 import "./index.css";
 import { routeTree } from "./routeTree.gen";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ModeProvider } from "./features/dashboard/hooks/mode-provider";
 
 const router = createRouter({ routeTree, history: createHashHistory() });
 
@@ -23,12 +24,14 @@ const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <TokenProvider>
-        <WorkspacesProvider>
-          <RouterProvider router={router} />
-        </WorkspacesProvider>
-      </TokenProvider>
-    </QueryClientProvider>
+    <ModeProvider>
+      <QueryClientProvider client={queryClient}>
+        <TokenProvider>
+          <WorkspacesProvider>
+            <RouterProvider router={router} />
+          </WorkspacesProvider>
+        </TokenProvider>
+      </QueryClientProvider>
+    </ModeProvider>
   </React.StrictMode>
 );
